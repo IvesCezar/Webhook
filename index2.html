@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chamados - Captação de Veículos</title>
+    <style>
+        :root {
+            color-scheme: light;
+            font-family: "Segoe UI", sans-serif;
+            color: #202b2a;
+            background: #f3f6f4;
+            font-synthesis: none;
+            text-rendering: optimizeLegibility;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            min-width: 320px;
+            min-height: 100vh;
+            margin: 0;
+            padding: 48px 20px;
+            background: radial-gradient(ellipse at 50% 0, #e1ece6 0, #f3f6f4 52%);
+        }
+
+        form {
+            width: min(100%, 720px);
+            margin: 0 auto;
+            padding: 36px;
+            background: #fff;
+            border: 1px solid #e0e8e3;
+            border-radius: 10px;
+            box-shadow: 0 16px 44px rgba(34, 57, 48, 0.08);
+        }
+
+        .form-header {
+            margin-bottom: 30px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid #e8eeea;
+        }
+
+        .form-header h1 {
+            margin: 0;
+            color: #203b32;
+            font-size: 25px;
+            font-weight: 650;
+        }
+
+        .form-header p {
+            margin: 8px 0 0;
+            color: #6b7972;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .form-section + .form-section {
+            margin-top: 28px;
+        }
+
+        .section-title {
+            margin: 0 0 16px;
+            color: #315a49;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .field-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px 16px;
+        }
+
+        .field {
+            min-width: 0;
+        }
+
+        .field-wide {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            color: #35433d;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        input, select, textarea {
+            display: block;
+            width: 100%;
+            min-height: 44px;
+            padding: 10px 12px;
+            border: 1px solid #d5dfd9;
+            border-radius: 6px;
+            outline: none;
+            background: #fff;
+            color: #26352e;
+            font: inherit;
+            font-size: 14px;
+            transition: border-color 150ms ease, box-shadow 150ms ease;
+        }
+
+        input::placeholder, textarea::placeholder {
+            color: #9aa69f;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: #4c8067;
+            box-shadow: 0 0 0 3px rgba(76, 128, 103, 0.14);
+        }
+
+        textarea {
+            min-height: 112px;
+            resize: vertical;
+        }
+
+        button {
+            width: 100%;
+            min-height: 48px;
+            margin-top: 28px;
+            border: 0;
+            border-radius: 6px;
+            background: #315f4b;
+            color: #fff;
+            font: inherit;
+            font-size: 15px;
+            font-weight: 650;
+            cursor: pointer;
+            transition: background 150ms ease, transform 150ms ease;
+        }
+
+        button:hover {
+            background: #264d3c;
+        }
+
+        button:active {
+            transform: translateY(1px);
+        }
+
+        button:focus-visible {
+            outline: 3px solid rgba(76, 128, 103, 0.35);
+            outline-offset: 3px;
+        }
+
+        @media (max-width: 560px) {
+            body {
+                padding: 20px 14px;
+            }
+
+            form {
+                padding: 24px 18px;
+            }
+
+            .form-header h1 {
+                font-size: 22px;
+            }
+
+            .field-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .field-wide {
+                grid-column: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <form action="https://ivescezar.app.n8n.cloud/webhook-test/tabela" method="POST">
+        <header class="form-header">
+            <h1>Captação de cliente</h1>
+            <p>Preencha os dados para registrar o atendimento e acompanhar a oportunidade.</p>
+        </header>
+
+        <section class="form-section" aria-labelledby="atendimento-title">
+            <h2 class="section-title" id="atendimento-title">Dados do atendimento</h2>
+            <div class="field-grid">
+                <div class="field">
+                    <label for="nome_consultor">Seu nome</label>
+                    <input type="text" id="nome_consultor" name="nome_consultor" placeholder="Nome do vendedor ou atendente" required>
+                </div>
+                <div class="field">
+                    <label for="email">Seu e-mail</label>
+                    <input type="email" id="email" name="email" placeholder="E-mail corporativo" required>
+                </div>
+            </div>
+        </section>
+
+        <section class="form-section" aria-labelledby="cliente-title">
+            <h2 class="section-title" id="cliente-title">Dados do cliente</h2>
+            <div class="field-grid">
+                <div class="field">
+                    <label for="nome_cliente">Nome do cliente</label>
+                    <input type="text" id="nome_cliente" name="nome_cliente" placeholder="Nome do cliente interessado" required>
+                </div>
+                <div class="field">
+                    <label for="telefone">WhatsApp ou telefone</label>
+                    <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" required>
+                </div>
+                <div class="field">
+                    <label for="veiculo">Veículo de interesse</label>
+                    <input type="text" id="veiculo" name="veiculo" placeholder="Ex.: Chevrolet Onix 2022" required>
+                </div>
+                <div class="field">
+                    <label for="origem">Origem do contato</label>
+                    <select id="origem" name="origem" required>
+                        <option value="" disabled selected>Selecione uma opção</option>
+                        <option value="whatsapp">WhatsApp / Chat</option>
+                        <option value="facebook_ads">Facebook Ads</option>
+                        <option value="instagram">Instagram</option>
+                        <option value="loja_fisica">Visita na loja</option>
+                        <option value="indicacao">Indicação</option>
+                        <option value="outros">Outros</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <section class="form-section" aria-labelledby="chamado-title">
+            <h2 class="section-title" id="chamado-title">Detalhes do chamado</h2>
+            <div class="field-grid">
+                <div class="field field-wide">
+                    <label for="assunto">Assunto</label>
+                    <input type="text" id="assunto" name="assunto" placeholder="Ex.: análise de crédito ou dúvida técnica" required>
+                </div>
+                <div class="field field-wide">
+                    <label for="descricao">Detalhes e descrição</label>
+                    <textarea id="descricao" name="descricao" placeholder="Descreva os detalhes da negociação, restrições ou suporte necessário..." rows="4" required></textarea>
+                </div>
+            </div>
+        </section>
+
+        <button type="submit">Enviar Chamado</button>
+    </form>
+
+</body>
+</html>
