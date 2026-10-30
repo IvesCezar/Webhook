@@ -1,0 +1,493 @@
+{
+  "updatedAt": "2026-10-30T00:34:04.000Z",
+  "createdAt": "2026-10-30T00:22:25.111Z",
+  "id": "UXNFQhUI22F4WKWd",
+  "name": "My workflow 2",
+  "description": null,
+  "active": true,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "tabela",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "87467eec-fdb8-4c8c-815e-b80531f409a7",
+      "name": "Webhook",
+      "webhookId": "37aaf6e4-6886-4734-81b4-328b82fbff63"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1U1lU8ohbfVrnmubpsjUvCFx2xv1GZr5pj605eRiCQ8I",
+          "mode": "list",
+          "cachedResultName": "cadastro de clientes",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1U1lU8ohbfVrnmubpsjUvCFx2xv1GZr5pj605eRiCQ8I/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Página1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1U1lU8ohbfVrnmubpsjUvCFx2xv1GZr5pj605eRiCQ8I/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Nome do cliente ": "={{ $json.body.nome_cliente }}",
+            "Telefone": "={{ $json.body.telefone }}",
+            "Veiculo de interesse ": "={{ $json.body.veiculo }}",
+            "Origem do contato": "={{ $json.body.origem }}",
+            "assunto": "={{ $json.body.assunto }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Nome do cliente ",
+              "displayName": "Nome do cliente ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Telefone",
+              "displayName": "Telefone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Veiculo de interesse ",
+              "displayName": "Veiculo de interesse ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Origem do contato",
+              "displayName": "Origem do contato",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "assunto",
+              "displayName": "assunto",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        224,
+        0
+      ],
+      "id": "83fe31dc-31db-41c5-a265-78edec7c7bbe",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "dTY3nmKTzeG6ZwNc",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "ivesao@gmail.com",
+        "subject": "seu chamado foi aberto aguarde",
+        "emailType": "text",
+        "message": "chamado aberto",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        448,
+        0
+      ],
+      "id": "4c37919d-f8c0-4bd2-9673-cf791ef3a1f8",
+      "name": "Send a message",
+      "webhookId": "7e22ca86-4c23-4d85-9628-36ab06bc78d4",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "aMa0bDLG0gcsuWhe",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "ivesao@gmail.com",
+        "subject": "ola",
+        "message": "ola ola",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        672,
+        0
+      ],
+      "id": "db5ffc8b-6b4f-4771-97f8-f0a4600f32e2",
+      "name": "Send a message1",
+      "webhookId": "b3e2229f-f481-468e-94c4-470ce9e8158d",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "aMa0bDLG0gcsuWhe",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        [
+          {
+            "node": "Send a message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "nodeGroups": [],
+  "pinData": {},
+  "versionId": "75899520-c30d-4163-b92b-23e1e257fd6a",
+  "activeVersionId": "75899520-c30d-4163-b92b-23e1e257fd6a",
+  "versionCounter": 23,
+  "triggerCount": 1,
+  "sourceWorkflowId": null,
+  "tags": [],
+  "parentFolder": null,
+  "activeVersion": {
+    "updatedAt": "2026-10-30T00:37:47.000Z",
+    "createdAt": "2026-10-30T00:34:04.003Z",
+    "versionId": "75899520-c30d-4163-b92b-23e1e257fd6a",
+    "workflowId": "UXNFQhUI22F4WKWd",
+    "nodes": [
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "tabela",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.2,
+        "position": [
+          0,
+          0
+        ],
+        "id": "87467eec-fdb8-4c8c-815e-b80531f409a7",
+        "name": "Webhook",
+        "webhookId": "37aaf6e4-6886-4734-81b4-328b82fbff63"
+      },
+      {
+        "parameters": {
+          "operation": "append",
+          "documentId": {
+            "__rl": true,
+            "value": "1U1lU8ohbfVrnmubpsjUvCFx2xv1GZr5pj605eRiCQ8I",
+            "mode": "list",
+            "cachedResultName": "cadastro de clientes",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1U1lU8ohbfVrnmubpsjUvCFx2xv1GZr5pj605eRiCQ8I/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "gid=0",
+            "mode": "list",
+            "cachedResultName": "Página1",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1U1lU8ohbfVrnmubpsjUvCFx2xv1GZr5pj605eRiCQ8I/edit#gid=0"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "Nome do cliente ": "={{ $json.body.nome_cliente }}",
+              "Telefone": "={{ $json.body.telefone }}",
+              "Veiculo de interesse ": "={{ $json.body.veiculo }}",
+              "Origem do contato": "={{ $json.body.origem }}",
+              "assunto": "={{ $json.body.assunto }}"
+            },
+            "matchingColumns": [],
+            "schema": [
+              {
+                "id": "Nome do cliente ",
+                "displayName": "Nome do cliente ",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Telefone",
+                "displayName": "Telefone",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Veiculo de interesse ",
+                "displayName": "Veiculo de interesse ",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Origem do contato",
+                "displayName": "Origem do contato",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "assunto",
+                "displayName": "assunto",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.7,
+        "position": [
+          224,
+          0
+        ],
+        "id": "83fe31dc-31db-41c5-a265-78edec7c7bbe",
+        "name": "Append row in sheet",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "dTY3nmKTzeG6ZwNc",
+            "name": "Google Sheets account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "sendTo": "ivesao@gmail.com",
+          "subject": "seu chamado foi aberto aguarde",
+          "emailType": "text",
+          "message": "chamado aberto",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.gmail",
+        "typeVersion": 2.2,
+        "position": [
+          448,
+          0
+        ],
+        "id": "4c37919d-f8c0-4bd2-9673-cf791ef3a1f8",
+        "name": "Send a message",
+        "webhookId": "7e22ca86-4c23-4d85-9628-36ab06bc78d4",
+        "credentials": {
+          "gmailOAuth2": {
+            "id": "aMa0bDLG0gcsuWhe",
+            "name": "Gmail account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "sendTo": "ivesao@gmail.com",
+          "subject": "ola",
+          "message": "ola ola",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.gmail",
+        "typeVersion": 2.2,
+        "position": [
+          672,
+          0
+        ],
+        "id": "db5ffc8b-6b4f-4771-97f8-f0a4600f32e2",
+        "name": "Send a message1",
+        "webhookId": "b3e2229f-f481-468e-94c4-470ce9e8158d",
+        "credentials": {
+          "gmailOAuth2": {
+            "id": "aMa0bDLG0gcsuWhe",
+            "name": "Gmail account"
+          }
+        }
+      }
+    ],
+    "connections": {
+      "Webhook": {
+        "main": [
+          [
+            {
+              "node": "Append row in sheet",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Append row in sheet": {
+        "main": [
+          [
+            {
+              "node": "Send a message",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Send a message": {
+        "main": [
+          [
+            {
+              "node": "Send a message1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "nodeGroups": [],
+    "authors": "Ives Diniz Cezar",
+    "name": "Version 75899520",
+    "description": "teste",
+    "autosaved": false,
+    "workflowPublishHistory": [
+      {
+        "createdAt": "2026-10-30T00:37:47.826Z",
+        "id": 1,
+        "workflowId": "UXNFQhUI22F4WKWd",
+        "versionId": "75899520-c30d-4163-b92b-23e1e257fd6a",
+        "event": "activated",
+        "userId": "c1dc938b-3e4e-49d9-a70f-bfbe74157397"
+      }
+    ]
+  },
+  "homeProject": {
+    "id": "reSCHSuFlGhMZVjl",
+    "type": "personal",
+    "name": "Ives Diniz Cezar <ivesao@gmail.com>",
+    "icon": null
+  },
+  "sharedWithProjects": [],
+  "usedCredentials": [
+    {
+      "id": "aMa0bDLG0gcsuWhe",
+      "name": "Gmail account",
+      "type": "gmailOAuth2",
+      "currentUserCanUse": true,
+      "homeProject": {
+        "id": "reSCHSuFlGhMZVjl",
+        "type": "personal",
+        "name": "Ives Diniz Cezar <ivesao@gmail.com>",
+        "icon": null
+      },
+      "sharedWithProjects": []
+    },
+    {
+      "id": "dTY3nmKTzeG6ZwNc",
+      "name": "Google Sheets account",
+      "type": "googleSheetsOAuth2Api",
+      "currentUserCanUse": true,
+      "homeProject": {
+        "id": "reSCHSuFlGhMZVjl",
+        "type": "personal",
+        "name": "Ives Diniz Cezar <ivesao@gmail.com>",
+        "icon": null
+      },
+      "sharedWithProjects": []
+    }
+  ],
+  "scopes": [
+    "execution:delete",
+    "execution:list",
+    "execution:read",
+    "execution:reveal",
+    "workflow:create",
+    "workflow:delete",
+    "workflow:disableRedaction",
+    "workflow:enableRedaction",
+    "workflow:execute",
+    "workflow:execute-chat",
+    "workflow:export",
+    "workflow:import",
+    "workflow:list",
+    "workflow:move",
+    "workflow:publish",
+    "workflow:read",
+    "workflow:share",
+    "workflow:unpublish",
+    "workflow:unshare",
+    "workflow:update"
+  ],
+  "checksum": "b86216b81d81ca5e3ae06f5effeee53697ad70f9ea98ea081a7785b8b919eda2"
+}
